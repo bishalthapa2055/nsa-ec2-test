@@ -23,7 +23,7 @@ app.get("/check",(req , res) =>{
         status : true ,
         data :{
             id : '1',
-            name : "bishal",
+            name : process.env.name,
         }
     })
 })

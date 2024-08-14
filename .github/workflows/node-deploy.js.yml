@@ -25,5 +25,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+
+    - run: |
+        touch .env
+        echo "${{secrets.name}}" > .env
+
     - run: npm run build --if-present
     - run: pm2 restart dep
