@@ -27,6 +27,20 @@ app.get("/check",(req , res) =>{
         }
     })
 })
+app.get("/users" , (req , res) =>{
+    const data = [
+        {id : 1 , name : "Bishal" , address : "kathmandu"},
+        {id : 1 , name : "Bishal" , address : "kathmandu"},
+        {id : 1 , name : "Bishal" , address : "kathmandu"},
+        {id : 1 , name : "Bishal" , address : "kathmandu"},
+        {id : 1 , name : "Bishal" , address : "kathmandu"},
+        {id : 1 , name : "Bishal" , address : "kathmandu"}
+    ]
+    res.status(200).json({
+        status : true ,
+        data :data
+    })
+})
 app.all("*" ,(req , res) =>{
    throw new NotFoundError()
 })
