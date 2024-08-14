@@ -24,7 +24,6 @@ app.get("/check",(req , res) =>{
         data :{
             id : '1',
             name : "bishal",
-            address : "thapa"
         }
     })
 })
