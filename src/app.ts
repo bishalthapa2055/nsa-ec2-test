@@ -18,6 +18,16 @@ app.all("/", (req , res) =>{
     res.status(200).json({status : true , message : "Server is Live"})
 })
 
+app.get("/check",(req , res) =>{
+    res.status(200).json({
+        status : true ,
+        data :{
+            id : '1',
+            name : "bishal",
+            address : "thapa"
+        }
+    })
+})
 app.all("*" ,(req , res) =>{
    throw new NotFoundError()
 })
