@@ -89,14 +89,14 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: scp -r artifacts/* $SSH_USER@$SSH_HOST:/var/www
 
-      # - name: Install Node.js and PM2 on EC2
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     SSH_USER: ${{ secrets.SSH_USER }}
-      #     SSH_HOST: ${{ secrets.SSH_HOST }}
-      #   run: |
-      #     ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST '
-      #       curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs && sudo npm install -g pm2'
+      - name: Install Node.js and PM2 on EC2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+        run: |
+          ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST '
+            curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs && sudo npm install -g pm2'
 
       - name: Deploy application on EC2
         env:
