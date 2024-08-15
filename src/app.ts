@@ -23,7 +23,7 @@ app.get("/checks",(req , res) =>{
         status : true ,
         data :{
             id : '1',
-            name : process.env.name,
+            name : process.env.MONGO_URI,
         }
     })
 })

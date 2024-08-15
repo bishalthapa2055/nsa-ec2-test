@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [14.x, 16.x, 18.x]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -29,9 +29,6 @@ jobs:
       - name: Archive production artifacts
         run: tar -czf artifacts.tar.gz -C dist .
 
-      - name: List build artifacts
-        run: ls -l artifacts.tar.gz
-
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -41,7 +38,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/localdev'
+    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -52,16 +49,11 @@ jobs:
           name: build-artifacts
           path: .
 
-      - name: List downloaded files
-        run: ls -l
+      - name: Create artifacts directory
+        run: mkdir artifacts
 
-      - name: Extract build artifacts
-        run: |
-          mkdir -p artifacts
-          tar -xzf artifacts.tar.gz -C artifacts
-
-      - name: Check extracted files
-        run: ls -l artifacts
+      - name: Extract artifacts
+        run: tar -xzf artifacts.tar.gz -C artifacts
 
       - name: Setup SSH
         env:
@@ -72,7 +64,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
 
       - name: Create target directory on EC2
         env:
@@ -80,9 +72,6 @@ jobs:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST 'sudo mkdir -p /var/www && sudo chown -R $SSH_USER:$SSH_USER /var/www'
-
-      - name: Check artifact directory
-        run: ls -l artifacts
 
       - name: Copy artifacts via SSH
         env:
@@ -98,27 +87,21 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
         run: |
           ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST '
-            curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&
-            sudo apt-get install -y nodejs &&
-            sudo npm install -g pm2 &&
-            echo "Node.js and PM2 installed."'
+            curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install -y nodejs && sudo npm install -g pm2'
 
       - name: Deploy application on EC2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-          MONGO_URL: ${{ secrets.MONGO_URI }}
-          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          MONGO_URL: ${{secrets.MONGO_URI}}
         run: |
           ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST '
             cd /var/www &&
             echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env &&
             npm install --production &&
             pm2 restart my-app || pm2 start server.js --name "my-app" &&
-            pm2 save &&
-            echo "Application deployed."'
+            pm2 save'
 
       - name: Clean up
         run: rm -rf ~/.ssh/id_rsa artifacts
