@@ -61,6 +61,16 @@ app.get("/users" , (req , res) =>{
         data :data
     })
 })
+
+app.post("/data" ,(req , res ) =>{
+    res.status(200).json({
+        status : true , 
+        data :{
+            data : "Hello from data route",
+            envData : process.env.MONGO_URI
+        }
+    })
+} )
 app.all("*" ,(req , res) =>{
    throw new NotFoundError()
 })
