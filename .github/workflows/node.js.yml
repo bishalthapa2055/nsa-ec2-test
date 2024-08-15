@@ -71,7 +71,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
-        run: ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST 'sudo mkdir -p /var/www && sudo chown -R $SSH_USER:$SSH_USER /var/www && sudo chmod -R 755 /var/www''
+        run: ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST 'sudo mkdir -p /var/www && sudo chown -R $SSH_USER:$SSH_USER /var/www && sudo chmod -R 755 /var/www'
 
       - name: Copy artifacts via SSH
         env:
