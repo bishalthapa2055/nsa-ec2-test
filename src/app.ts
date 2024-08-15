@@ -62,7 +62,7 @@ app.get("/users" , (req , res) =>{
     })
 })
 
-app.post("/data" ,(req , res ) =>{
+app.get("/data" ,(req , res ) =>{
     res.status(200).json({
         status : true , 
         data :{
