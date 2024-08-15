@@ -28,6 +28,11 @@ app.get("/checks",(req , res) =>{
         }
     })
 })
+app.get("/apple",(req , res ) =>{
+    res.status(200).json({
+        message :"Apple is thers"
+    })
+})
 app.get("/users" , (req , res) =>{
     const data = [
         {id : 1 , name : "Bishal" , address : "kathmandu"},
