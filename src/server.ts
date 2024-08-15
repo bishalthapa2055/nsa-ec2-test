@@ -11,23 +11,23 @@ const start = async () => {
     const PORT = process.env.ENV_PORT || 5001;
 
     try {
-        const mongodb = config.app.mongoUrl;
-        mongoose.set("strictQuery", true);
-        await mongoose.connect(mongodb).then((res) => {
-          console.log("Connected to mongoDb sucessfully");
-        });
+        // const mongodb = config.app.mongoUrl;
+        // mongoose.set("strictQuery", true);
+        // await mongoose.connect(mongodb).then((res) => {
+        //   console.log("Connected to mongoDb sucessfully");
+        // });
         
     
-        const isExistAdmin = await Admin.findOne({
-          email :config?.app?.admin_email!
-        })
+        // const isExistAdmin = await Admin.findOne({
+        //   email :config?.app?.admin_email!
+        // })
     
-        if(!isExistAdmin || isExistAdmin === null ){
-          await Admin.build({
-            email :  config?.app?.admin_email!,
-            password : config?.app?.admin_password! 
-          }).save()
-        }
+        // if(!isExistAdmin || isExistAdmin === null ){
+        //   await Admin.build({
+        //     email :  config?.app?.admin_email!,
+        //     password : config?.app?.admin_password! 
+        //   }).save()
+        // }
     
     
         //seeding

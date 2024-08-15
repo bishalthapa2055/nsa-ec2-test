@@ -18,7 +18,7 @@ app.all("/", (req , res) =>{
     res.status(200).json({status : true , message : "Server is Live"})
 })
 
-app.get("/check",(req , res) =>{
+app.get("/checks",(req , res) =>{
     res.status(200).json({
         status : true ,
         data :{
