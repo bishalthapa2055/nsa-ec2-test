@@ -46,6 +46,14 @@ app.get("/users" , (req , res) =>{
         {id : 9 , name : "Bishal" , address : "kathmandu"},
         {id : 10 , name : "Bishal" , address : "kathmandu"},
         {id : 11 , name : "Bishal" , address : "kathmandu"},
+        {id : 12, name : "Bishal" , address : "kathmandssu"},
+        {id : 5 , name : "Bishal" , address : "kathmandu"},
+        {id : 6 , name : "Bishal" , address : "kathmandu"},
+        {id : 7 , name : "Bishal" , address : "kathmandu"},
+        {id : 8 , name : "Bishal" , address : "kathmandu"},
+        {id : 9 , name : "Bishal" , address : "kathmandu"},
+        {id : 10 , name : "Bishal" , address : "kathmandu"},
+        {id : 11 , name : "Bishal" , address : "kathmandu"},
         {id : 12, name : "Bishal" , address : "kathmandssu"}
     ]
     res.status(200).json({
