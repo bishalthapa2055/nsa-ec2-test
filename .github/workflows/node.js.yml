@@ -27,7 +27,7 @@ jobs:
         run: npm run build
 
       - name: Archive production artifacts
-        run: tar -czf artifacts.tar.gz -C dist . 'dist package.json node_modules'
+        run: tar -czf artifacts.tar.gz -C dist .
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
