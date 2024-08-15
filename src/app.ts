@@ -36,11 +36,17 @@ app.get("/apple",(req , res ) =>{
 app.get("/users" , (req , res) =>{
     const data = [
         {id : 1 , name : "Bishal" , address : "kathmandu"},
-        {id : 1 , name : "Bishal" , address : "kathmandu"},
-        {id : 1 , name : "Bishal" , address : "kathmandu"},
-        {id : 1 , name : "Bishal" , address : "kathmandu"},
-        {id : 1 , name : "Bishal" , address : "kathmandu"},
-        {id : 1 , name : "Bishal" , address : "kathmandu"}
+        {id : 2, name : "Bishal" , address : "kathmandu"},
+        {id : 3 , name : "Bishal" , address : "kathmandu"},
+        {id : 4 , name : "Bishal" , address : "kathmandu"},
+        {id : 5 , name : "Bishal" , address : "kathmandu"},
+        {id : 6 , name : "Bishal" , address : "kathmandu"},
+        {id : 7 , name : "Bishal" , address : "kathmandu"},
+        {id : 8 , name : "Bishal" , address : "kathmandu"},
+        {id : 9 , name : "Bishal" , address : "kathmandu"},
+        {id : 10 , name : "Bishal" , address : "kathmandu"},
+        {id : 11 , name : "Bishal" , address : "kathmandu"},
+        {id : 12, name : "Bishal" , address : "kathmandu"}
     ]
     res.status(200).json({
         status : true ,
