@@ -67,7 +67,8 @@ app.get("/data" ,(req , res ) =>{
         status : true , 
         data :{
             data : "Hello from data route",
-            envData : process.env.MONGO_URI
+            envData : process.env.MONGO_URI,
+            message :"Data routes exists",
         }
     })
 } )
