@@ -29,11 +29,11 @@ jobs:
       - name: List build directory contents
         run: ls -R dist
 
-      # - name: Archive production artifacts
-      #   run: tar -czf artifacts.tar.gz -C dist .
-
       - name: Archive production artifacts
-        run: tar -czf artifacts.tar.gz -C . dist package.json
+        run: tar -czf artifacts.tar.gz -C dist .
+
+      # - name: Archive production artifacts
+      #   run: tar -czf artifacts.tar.gz -C . dist package.json
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
