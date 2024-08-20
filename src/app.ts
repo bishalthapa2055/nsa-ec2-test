@@ -62,7 +62,7 @@ app.get("/users" , (req , res) =>{
     })
 })
 
-app.get("/datas" ,(req , res ) =>{
+app.get("/da" ,(req , res ) =>{
     res.status(200).json({
         status : true , 
         data :{
