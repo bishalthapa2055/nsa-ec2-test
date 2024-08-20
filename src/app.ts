@@ -62,13 +62,13 @@ app.get("/users" , (req , res) =>{
     })
 })
 
-app.get("/data" ,(req , res ) =>{
+app.get("/datas" ,(req , res ) =>{
     res.status(200).json({
         status : true , 
         data :{
             data : "Hello from data route",
             envData : process.env.MONGO_URI,
-            message :"Data routes exists",
+            message :"Data roussssstes exists",
         }
     })
 } )
